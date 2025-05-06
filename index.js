@@ -6,8 +6,11 @@ const cors = require("cors");
 const app = express();
 const port = process.env.PORT || 3000;
 
-app.use(cors({ origin: '*' }));
-app.use(express.json());
+app.use(cors({
+  origin: "*", // allow semua origin termasuk chrome-extension://
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  allowedHeaders: ["Content-Type"]
+}));app.use(express.json());
 
 app.post("/ask", async (req, res) => {
   const { question } = req.body;
